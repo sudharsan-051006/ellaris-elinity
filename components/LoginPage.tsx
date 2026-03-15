@@ -5,6 +5,26 @@ import { Link } from 'react-router-dom';
 const LoginPage = () => {
     const [mounted, setMounted] = useState(false);
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    
+    const handleLogin = (e) => {
+    e.preventDefault();
+
+    const fixedEmail = "user@gmail.com";
+    const fixedPassword = "123456";
+
+    if (email === fixedEmail && password === fixedPassword) {
+        alert("Login successful");
+
+        localStorage.setItem("isLoggedIn", "true");
+
+        window.location.href = "/dashboard";
+    } else {
+        alert("Invalid email or password");
+    }
+    };
+
     useEffect(() => {
         setMounted(true);
     }, []);
@@ -80,7 +100,7 @@ const LoginPage = () => {
                             <p className="text-white/50">Sign in to access your dashboard</p>
                         </div>
 
-                        <form className="space-y-5 relative" onSubmit={(e) => e.preventDefault()}>
+                        <form className="space-y-5 relative" onSubmit={handleLogin}>
                             <div className="space-y-2">
                                 <label className="text-xs font-semibold text-white/60 ml-1 uppercase tracking-wider">Email</label>
                                 <div className="relative group/input">
@@ -89,8 +109,10 @@ const LoginPage = () => {
                                     </div>
                                     <input
                                         type="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                         className="w-full bg-[#0F0C29]/60 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder:text-white/20 focus:outline-none focus:border-[#BB3DF6] focus:ring-1 focus:ring-[#BB3DF6] transition-all duration-300 shadow-inner"
                                         placeholder="you@example.com"
-                                        className="w-full bg-[#0F0C29]/60 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder:text-white/20 focus:outline-none focus:border-[#BB3DF6] focus:ring-1 focus:ring-[#BB3DF6] transition-all duration-300 shadow-inner"
                                     />
                                 </div>
                             </div>
@@ -103,8 +125,10 @@ const LoginPage = () => {
                                     </div>
                                     <input
                                         type="password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                         className="w-full bg-[#0F0C29]/60 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder:text-white/20 focus:outline-none focus:border-[#BB3DF6] focus:ring-1 focus:ring-[#BB3DF6] transition-all duration-300 shadow-inner"
                                         placeholder="••••••••"
-                                        className="w-full bg-[#0F0C29]/60 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white placeholder:text-white/20 focus:outline-none focus:border-[#BB3DF6] focus:ring-1 focus:ring-[#BB3DF6] transition-all duration-300 shadow-inner"
                                     />
                                 </div>
                             </div>
